@@ -27,7 +27,6 @@ import EventFarm from "../Pages/EventFarm";
 export const NormalRoutes = [
   { path: "/", element: <Home /> },
   { path: "/results/:projectId", element: <Result /> },
-  { path: "/results/timeline", element: <History /> },
   { path: "/farm", element: <Farm /> },
   { path: "/farm/detail/:farmId", element: <ProflieFarm /> },
   { path: "/farm/detail/:farmId/plants", element: <PlantFarm /> },

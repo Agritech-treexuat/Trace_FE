@@ -1,0 +1,80 @@
+:root {
+  --PrimaryColor: hsl(151, 25%, 45%);
+  --SecondaryColor: hsl(143, 82%, 22%);
+  --gradientColor: linear-gradient(
+    to right,
+    hsl(148, 23%, 65%),
+    hsl(137, 30%, 40%)
+  );
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
+
+  --primary: #1f3e72;
+  --secondary: rgba(255, 255, 255, 0.78);
+  --blue-gradient: linear-gradient(97.05deg, #4066ff 3.76%, #2949c6 100%);
+  --orange-gradient: linear-gradient(270deg, #ffb978 0%, #ff922d 100%);
+  --blue: #4066ff;
+  --lightBlue: #eeeeff;
+  --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.25);
+}
+
+.v-wrapper {
+  padding-top: 4rem;
+}
+.v-container .image-container {
+  border: 8px solid rgb(232 232 232 / 93%);
+}
+
+.v-container > div {
+  flex: 1;
+}
+
+.v-right {
+  gap: 0.5rem;
+}
+
+.accordion {
+  margin-top: 2rem;
+  border: none;
+}
+
+.accordionItem {
+  background: white;
+  border: 0.8px solid rgba(128, 128, 128, 0.143);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.accordionItem.expanded {
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+.accordionButton {
+  background: white;
+  padding: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.icon1 {
+  padding: 10px;
+  background: #eeeeff;
+  border-radius: 5px;
+}
+
+.icon svg {
+  fill: var(--blue);
+}
+
+.accordionButton .primaryText {
+  font-size: 1.1rem;
+}
