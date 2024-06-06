@@ -1,0 +1,116 @@
+:root {
+  --PrimaryColor: hsl(151, 25%, 45%);
+}
+
+.information {
+  padding-top: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: black;
+  .r-title {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.4rem;
+    .button {
+      color: #ffffff;
+      justify-self: center;
+      font-size: medium;
+      font-weight: 600;
+      height: 55px;
+      width: 350px;
+      background-color: var(--PrimaryColor);
+      margin-bottom: 10px;
+      border-radius: 15px;
+      text-align: center;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  
+  .infor {
+    display: grid;
+    margin: 0.5rem;
+    box-shadow: 2px 2px 5px 2px rgba(137, 123, 123, 0.3);
+    border-radius: 20px;
+  }
+  .picture{
+
+  }
+  .product{
+    width: 100%;
+  }
+  .timeline {
+    width: 95%;
+    margin: 0.5rem;
+    box-shadow: 2px 2px 5px 2px rgba(137, 123, 123, 0.3);
+    border-radius: 20px;
+
+    .r-time {
+      padding: 1rem;
+      justify-content: center;
+      border-radius: 20px;
+      border: beige;
+    }
+  }
+}
+
+.tab-header {
+  background-color: var(--PrimaryColor);
+  height: 50px;
+}
+
+.more-infor {
+  width: 97%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  box-shadow: 2px 2px 5px 2px rgba(137, 123, 123, 0.3);
+  border-radius: 20px;
+  background-color: white 
+}
+
+.r-image {
+  margin: auto;
+  padding: 5rem;
+}
+
+.productInfor{
+  margin: 1rem;
+  border: black;
+
+  .titleTable{
+    display: flex;
+    padding: auto;
+    margin: auto;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    height: 2rem;
+    box-shadow: 2px 2px 5px 2px rgba(137, 123, 123, 0.3);
+    border-radius: 20px;
+  }
+  .tableInfor{
+    
+    border: black;
+  }
+}
+
+
+@media screen and (min-width: 100px) {
+  .information {
+    line-height: 1.2; /* Giảm khoảng cách giữa các dòng văn bản */
+  }
+  .content {
+    flex-direction: column;
+  }
+}
