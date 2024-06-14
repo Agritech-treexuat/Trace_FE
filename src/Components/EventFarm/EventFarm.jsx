@@ -125,6 +125,13 @@ const EventFarmComponent = () => {
     return pageNumbers;
   };
 
+  const displayWalletAddress = (address) => {
+    if (true) {
+      return `${address.slice(0, 10)}...${address.slice(-10)}`;
+    }
+    return address;
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentEvents = allEventByFarm
     ? allEventByFarm.slice(startIndex, startIndex + itemsPerPage)
@@ -141,9 +148,24 @@ const EventFarmComponent = () => {
                   <h3 className="font-semibold text-2xl text-blueGray-700 lg:text-3xl">
                     Bảng thông tin
                   </h3>
+                  <div className="text-md leading-normal mt-0 mb-1 text-blue-800 font-bold uppercase">
+                    <i className="fas fa-wallet mr-2 text-lg text-blueGray-400"></i>
+                    {allEventByFarm[0]?.walletAddress !=="Không có dữ liệu"? (
+                      <a
+                        href={`https://escan.live/address/${allEventByFarm[0]?.walletAddress}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {displayWalletAddress(allEventByFarm[0]?.walletAddress)}
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
+            
 
             <div className="block w-full overflow-x-auto lg:h-[440px] h-[330px]">
               <table className="items-center bg-transparent w-full border-collapse">
