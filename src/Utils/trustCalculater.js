@@ -39,7 +39,6 @@ class TrustEvaluator {
     }
 
     evaluateTrust(metrics) {
-        console.log("metrics", metrics)
         const thresholds = {
             matKetNoi: [0.01, 0.02, 0.05, 0.10],
             hoatDongKhongCoVideo: [0.05, 0.2, 0.5, 0.8],
