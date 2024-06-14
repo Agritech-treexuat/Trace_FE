@@ -12,7 +12,6 @@ import Farm from "../Pages/Farm/Farm";
 import New from "../Pages/New/New";
 import About from "../Pages/AboutUs/About";
 import ProflieFarm from "../Pages/Farm/ProflieFarm";
-import History from "../Pages/Result/History";
 import NotFound from "../Pages/404/NotFound";
 import PlantFarm from "../Pages/Farm/PlantFarm";
 import ProjectFarm from "../Pages/Farm/ProjectFarm";

@@ -194,11 +194,17 @@ const Information = () => {
         {isSuccessProjectInfo && (
           <button
             className="button"
-            onClick={() =>
-              navigate(`/search/index/${projectInfo.projectIndex}`)
-            }
+            // onClick={() =>
+            //   navigate(`/search/index/${projectInfo.projectIndex}`)
+            // }
           >
+            <a
+              href={`/search/index/${projectInfo.projectIndex}`}
+              target="_blank"
+              rel="noreferrer"
+            >
             Mã dự án trên blockchain : {projectInfo.projectIndex}
+            </a>
           </button>
         )}
         {isSuccessProjectInfo && isSuccessOutput && (
@@ -224,7 +230,7 @@ const Information = () => {
                 <h3 className="text-green-700 font-semibold text-lg mr-2">
                   Mức độ tin tưởng:{" "}
                   {trustScore?.totalScore || trustScore?.totalScore === 0
-                    ? trustScore?.totalScore
+                    ? trustScore?.totalScore + 1 + "/5"
                     : "none"}
                   {trustScore?.totalScore || trustScore?.totalScore === 0 ? (
                     <div>
@@ -260,7 +266,7 @@ const Information = () => {
                         Số hoạt động không có video đi kèm
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {processWithoutObjectDetectionCount}
+                        {processWithoutObjectDetectionCount} hoạt động
                         {trustScore?.hoatDongKhongCoVideo ||
                         trustScore?.hoatDongKhongCoVideo === 0 ? (
                           <div>
@@ -276,10 +282,10 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng khai báo bị xoá
+                        Số khai báo bị xoá
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {totalDeletedItem}
+                        {totalDeletedItem} khai báo
                         {trustScore?.khaiBaoBiXoa ||
                         trustScore?.khaiBaoBiXoa === 0 ? (
                           <div>
@@ -295,13 +301,13 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng khai báo bị sửa đổi
+                        Số khai báo bị sửa đổi
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalEditProcess + editExpectCount + editOutputCount} /{" "}
                         {dataProcess?.length +
                           dataExpect?.length +
-                          Output?.length}
+                          Output?.length} khai báo
                         {trustScore?.khaiBaoBiSuaDoi ||
                         trustScore?.khaiBaoBiSuaDoi === 0 ? (
                           <div>
@@ -317,10 +323,10 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng camera
+                        Số camera trên diện tích
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {totalCamera}
+                        {totalCamera} camera / {projectInfo.square} m2
                         {trustScore?.cameraDienTich ||
                         trustScore?.cameraDienTich === 0 ? (
                           <div>
