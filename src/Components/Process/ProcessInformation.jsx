@@ -1,13 +1,24 @@
 import React from "react";
 import ListActivityProcess from "../ListEvent/ListActivityProcess";
+import { IoInformationCircleSharp } from "react-icons/io5";
 
-const ProcessInformation = ({ processInfo }) => {
+const ProcessInformation = ({ processInfo, setGuideType, openDrawerTop }) => {
   return (
     <section>
       <div className=" bg-white text-black px-5 py-2 lg:py-6 shadow border-b border-gray-300">
         <div className="flex items-center lg:space-x-60 space-x-4">
           <div className="lg:text-3xl text-base text-black font-bold px-5 py-2 lg:py-6 rounded-lg">
             Thông tin quá trình canh tác
+            <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("process")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
           </div>
           <div className="bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-sm px-4 lg:px-6">
             <svg

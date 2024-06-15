@@ -124,6 +124,7 @@ const Information = () => {
   };
 
   const [openTop, setOpenTop] = useState(false);
+  const [guideType, setGuideType] = useState("");
   const openDrawerTop = () => setOpenTop(true);
   const closeDrawerTop = () => setOpenTop(false);
 
@@ -348,6 +349,16 @@ const Information = () => {
 
         <section className="more-infor">
           <div className="mb-4">Video tổng quan</div>
+          <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("videoOverview")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
           {isSuccessProjectInfo && projectInfo?.video_urls?.length > 0 && (
             <div>
               <VideoPlayer video_urls={projectInfo.video_urls} />
@@ -380,7 +391,7 @@ const Information = () => {
 
         <section className="timeline">
           {isSuccessProcess && dataProcess && (
-            <ProcessInformation processInfo={dataProcess} />
+            <ProcessInformation processInfo={dataProcess} setGuideType={setGuideType} openDrawerTop={openDrawerTop}/>
           )}
           {isLoadingProcess && <Spinner />}
         </section>
@@ -403,6 +414,7 @@ const Information = () => {
                 <IoInformationCircleSharp
                   onClick={(e) => {
                     e.stopPropagation()
+                    setGuideType("nonProcessObjectDetection")
                     openDrawerTop()
                   }}
                   style={{ color: "green", fontSize: "2rem" }}
@@ -449,6 +461,16 @@ const Information = () => {
             >
               <div className="flex items-center ">
                 <h1> Thông tin dự kiến sản lượng</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("expectedOutput")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -489,6 +511,16 @@ const Information = () => {
               } text-base lg:text-2xl`}
             >
               Quy trình mẫu
+              <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("defaultPlantFarming")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
             </AccordionHeader>
             <AccordionBody className="pt-0 text-base font-normal">
               {isSuccessPlantFarming && dataPlantFarming && (
@@ -514,6 +546,16 @@ const Information = () => {
             >
               <div className="flex items-center  flex-nowrap">
                 <h1 className="whitespace-nowrap">Đầu ra</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("output")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -555,6 +597,16 @@ const Information = () => {
                 } text-base lg:text-2xl`}
               >
                 <h1>Hình ảnh và thời tiết</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("imageAndWeather")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -600,6 +652,16 @@ const Information = () => {
               } text-base lg:text-2xl`}
             >
               Các chứng nhận
+              <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("certificates")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
             </AccordionHeader>
             <AccordionBody className="pt-0 text-base font-normal">
               {isSuccessCertificateImages && dataCertificateImages && (
@@ -623,6 +685,16 @@ const Information = () => {
             >
               <div className="flex items-center ">
                 <h1> Các hoạt động bị xóa</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("deletedProcess")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -719,7 +791,7 @@ const Information = () => {
       >
         <div className="mb-6 flex items-center justify-between">
           <Typography variant="h5" color="blue-gray">
-            Hướng dẫn sử dụng
+          Giải thích
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawerTop}>
             <svg
@@ -739,7 +811,42 @@ const Information = () => {
           </IconButton>
         </div>
         <Typography color="gray" className="mb-8 pr-4 font-normal">
-          Nội dung ghi ở đây
+          {
+          guideType === "videoOverview" &&
+          "Đây là video về quá trình sinh trưởng của cây trồng, được ghép từ các hình ảnh được chụp mỗi giờ tại nơi canh tác."
+          }
+        {
+          guideType === "nonProcessObjectDetection" &&
+          "Những video được phát hiện tự động nhưng không tương ứng với bất kỳ hoạt động canh tác nào được khai báo bởi nhà sản xuất nông nghiệp. (Đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "expectedOutput" &&
+          "Thông tin dự kiến sản lượng của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "defaultPlantFarming" &&
+          "Là quy trình canh tác tham khảo của dự án."
+        }
+        {
+          guideType === "output" &&
+          "Thông tin về các lần thu hoạch của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "imageAndWeather" &&
+          "Thông tin về hình ảnh và thời tiết của nơi canh tác. Chọn ngày mà bạn muốn xem, dữ liệu sẽ được cung cấp theo từng giờ. (Các hình ảnh đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "certificates" &&
+          "Các chứng nhận của dự án."
+        }
+        {
+          guideType === "deletedProcess" &&
+          "Các khai báo bị xóa của dự án. (Đều đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "process" &&
+          "Các hoạt động canh tác của dự án. (Đều đã được ghi trên Blockchain)"
+        }
         </Typography>
       </Drawer>
     </section>
