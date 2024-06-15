@@ -19,7 +19,7 @@ const TableDetailOutput = ({ detailOutput }) => {
               <dt className="text-sm font-medium text-gray-700">
                 Mã Transaction
               </dt>
-              <dd className="mt-1 text-sm text-black lg:text-base font-medium sm:mt-0 sm:col-span-2">
+              <dd className="mt-1 text-sm text-blue-500 lg:text-base font-medium sm:mt-0 sm:col-span-2">
                 {formatTransactionHashTable({
                   str: detailOutput.tx,
                   a: 8,

@@ -33,7 +33,6 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
   const [filterWeather, setFilterWeather] = useState([]);
 
   const [open, setOpen] = useState(true);
-  console.log("open", open);
   const handleOpen = () => {
     setOpen(!open);
   };
@@ -41,7 +40,6 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
   const handleFilter = () => {
     setFilterImages(
       dataImage.filter((item) => {
-        console.log("item", new Date(item.capture_time).toLocaleDateString());
         // only return the items that match the date (in day, month, year)
         return (
           new Date(item.capture_time).toLocaleDateString() ===
@@ -51,7 +49,6 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
     );
     setFilterWeather(
       dataWeather.filter((item) => {
-        console.log("item", new Date(item.time).toLocaleDateString());
         // only return the items that match the date (in day, month, year)
         return (
           new Date(item.time).toLocaleDateString() ===

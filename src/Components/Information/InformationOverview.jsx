@@ -183,7 +183,7 @@ const InformationOverview = ({ allDistributerWithQR, dataInfoOverview }) => {
       >
         <div className="mb-6 flex items-center justify-between">
           <Typography variant="h5" color="blue-gray">
-            Hướng dẫn sử dụng
+          Giải thích
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawerTop}>
             <svg
@@ -203,14 +203,8 @@ const InformationOverview = ({ allDistributerWithQR, dataInfoOverview }) => {
           </IconButton>
         </div>
         <Typography color="gray" className="mb-8 pr-4 font-normal">
-          Nội dung ghi ở đây
+        Các thông tin chung của dự án. (Đã được ghi trên Blockchain) 
         </Typography>
-        <div className="flex gap-2">
-          <Button size="sm" variant="outlined">
-            Nếu cần
-          </Button>
-          <Button size="sm">Get Started</Button>
-        </div>
       </Drawer>
     </section>
   );

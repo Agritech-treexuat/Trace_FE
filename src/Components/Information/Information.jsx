@@ -124,6 +124,7 @@ const Information = () => {
   };
 
   const [openTop, setOpenTop] = useState(false);
+  const [guideType, setGuideType] = useState("");
   const openDrawerTop = () => setOpenTop(true);
   const closeDrawerTop = () => setOpenTop(false);
 
@@ -194,11 +195,17 @@ const Information = () => {
         {isSuccessProjectInfo && (
           <button
             className="button"
-            onClick={() =>
-              navigate(`/search/index/${projectInfo.projectIndex}`)
-            }
+            // onClick={() =>
+            //   navigate(`/search/index/${projectInfo.projectIndex}`)
+            // }
           >
+            <a
+              href={`/search/index/${projectInfo.projectIndex}`}
+              target="_blank"
+              rel="noreferrer"
+            >
             Mã dự án trên blockchain : {projectInfo.projectIndex}
+            </a>
           </button>
         )}
         {isSuccessProjectInfo && isSuccessOutput && (
@@ -224,7 +231,7 @@ const Information = () => {
                 <h3 className="text-green-700 font-semibold text-lg mr-2">
                   Mức độ tin tưởng:{" "}
                   {trustScore?.totalScore || trustScore?.totalScore === 0
-                    ? trustScore?.totalScore
+                    ? trustScore?.totalScore + 1 + "/5"
                     : "none"}
                   {trustScore?.totalScore || trustScore?.totalScore === 0 ? (
                     <div>
@@ -260,7 +267,7 @@ const Information = () => {
                         Số hoạt động không có video đi kèm
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {processWithoutObjectDetectionCount}
+                        {processWithoutObjectDetectionCount} hoạt động
                         {trustScore?.hoatDongKhongCoVideo ||
                         trustScore?.hoatDongKhongCoVideo === 0 ? (
                           <div>
@@ -276,10 +283,10 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng khai báo bị xoá
+                        Số khai báo bị xoá
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {totalDeletedItem}
+                        {totalDeletedItem} khai báo
                         {trustScore?.khaiBaoBiXoa ||
                         trustScore?.khaiBaoBiXoa === 0 ? (
                           <div>
@@ -295,13 +302,13 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng khai báo bị sửa đổi
+                        Số khai báo bị sửa đổi
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalEditProcess + editExpectCount + editOutputCount} /{" "}
                         {dataProcess?.length +
                           dataExpect?.length +
-                          Output?.length}
+                          Output?.length} khai báo
                         {trustScore?.khaiBaoBiSuaDoi ||
                         trustScore?.khaiBaoBiSuaDoi === 0 ? (
                           <div>
@@ -317,10 +324,10 @@ const Information = () => {
                     </tr>
                     <tr className="text-gray-500">
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
-                        Số lượng camera
+                        Số camera trên diện tích
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {totalCamera}
+                        {totalCamera} camera / {projectInfo.square} m2
                         {trustScore?.cameraDienTich ||
                         trustScore?.cameraDienTich === 0 ? (
                           <div>
@@ -342,6 +349,16 @@ const Information = () => {
 
         <section className="more-infor">
           <div className="mb-4">Video tổng quan</div>
+          <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("videoOverview")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
           {isSuccessProjectInfo && projectInfo?.video_urls?.length > 0 && (
             <div>
               <VideoPlayer video_urls={projectInfo.video_urls} />
@@ -374,7 +391,7 @@ const Information = () => {
 
         <section className="timeline">
           {isSuccessProcess && dataProcess && (
-            <ProcessInformation processInfo={dataProcess} />
+            <ProcessInformation processInfo={dataProcess} setGuideType={setGuideType} openDrawerTop={openDrawerTop}/>
           )}
           {isLoadingProcess && <Spinner />}
         </section>
@@ -397,6 +414,7 @@ const Information = () => {
                 <IoInformationCircleSharp
                   onClick={(e) => {
                     e.stopPropagation()
+                    setGuideType("nonProcessObjectDetection")
                     openDrawerTop()
                   }}
                   style={{ color: "green", fontSize: "2rem" }}
@@ -443,6 +461,16 @@ const Information = () => {
             >
               <div className="flex items-center ">
                 <h1> Thông tin dự kiến sản lượng</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("expectedOutput")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -483,6 +511,16 @@ const Information = () => {
               } text-base lg:text-2xl`}
             >
               Quy trình mẫu
+              <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("defaultPlantFarming")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
             </AccordionHeader>
             <AccordionBody className="pt-0 text-base font-normal">
               {isSuccessPlantFarming && dataPlantFarming && (
@@ -508,6 +546,16 @@ const Information = () => {
             >
               <div className="flex items-center  flex-nowrap">
                 <h1 className="whitespace-nowrap">Đầu ra</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("output")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -549,6 +597,16 @@ const Information = () => {
                 } text-base lg:text-2xl`}
               >
                 <h1>Hình ảnh và thời tiết</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("imageAndWeather")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -594,6 +652,16 @@ const Information = () => {
               } text-base lg:text-2xl`}
             >
               Các chứng nhận
+              <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("certificates")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
             </AccordionHeader>
             <AccordionBody className="pt-0 text-base font-normal">
               {isSuccessCertificateImages && dataCertificateImages && (
@@ -617,6 +685,16 @@ const Information = () => {
             >
               <div className="flex items-center ">
                 <h1> Các hoạt động bị xóa</h1>
+                <div>
+                <IoInformationCircleSharp
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setGuideType("deletedProcess")
+                    openDrawerTop()
+                  }}
+                  style={{ color: "green", fontSize: "2rem" }}
+                />
+              </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -713,7 +791,7 @@ const Information = () => {
       >
         <div className="mb-6 flex items-center justify-between">
           <Typography variant="h5" color="blue-gray">
-            Hướng dẫn sử dụng
+          Giải thích
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawerTop}>
             <svg
@@ -733,7 +811,42 @@ const Information = () => {
           </IconButton>
         </div>
         <Typography color="gray" className="mb-8 pr-4 font-normal">
-          Nội dung ghi ở đây
+          {
+          guideType === "videoOverview" &&
+          "Đây là video về quá trình sinh trưởng của cây trồng, được ghép từ các hình ảnh được chụp mỗi giờ tại nơi canh tác."
+          }
+        {
+          guideType === "nonProcessObjectDetection" &&
+          "Những video được phát hiện tự động nhưng không tương ứng với bất kỳ hoạt động canh tác nào được khai báo bởi nhà sản xuất nông nghiệp. (Đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "expectedOutput" &&
+          "Thông tin dự kiến sản lượng của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "defaultPlantFarming" &&
+          "Là quy trình canh tác tham khảo của dự án."
+        }
+        {
+          guideType === "output" &&
+          "Thông tin về các lần thu hoạch của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "imageAndWeather" &&
+          "Thông tin về hình ảnh và thời tiết của nơi canh tác. Chọn ngày mà bạn muốn xem, dữ liệu sẽ được cung cấp theo từng giờ. (Các hình ảnh đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "certificates" &&
+          "Các chứng nhận của dự án."
+        }
+        {
+          guideType === "deletedProcess" &&
+          "Các khai báo bị xóa của dự án. (Đều đã được ghi trên Blockchain)"
+        }
+        {
+          guideType === "process" &&
+          "Các hoạt động canh tác của dự án. (Đều đã được ghi trên Blockchain)"
+        }
         </Typography>
       </Drawer>
     </section>
