@@ -36,7 +36,7 @@ const ListActivityProcess = ({ listActivity }) => {
     setReportsOpen(reportsOpen === value ? 0 : value);
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    alert("Copy thành công!");
+    // alert("Copy thành công!");
   };
   const [scrollLeft, setScrollLeft] = useState(0);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -55,6 +55,14 @@ const ListActivityProcess = ({ listActivity }) => {
   const closeModal = () => {
     setSelectedVideo(null);
   };
+
+  const formatVideoUrl = (video_url) => {
+    // if video_url end with .avi, then replace it with .webm
+    if (video_url.endsWith(".avi")) {
+      return video_url.replace(".avi", ".webm");
+    }
+    return video_url
+  }
 
   const data = [
     {
@@ -168,7 +176,7 @@ const ListActivityProcess = ({ listActivity }) => {
                           className="ml-20 cursor-pointer text-gray-400 hover:text-gray-700"
                           onClick={() =>
                             copyToClipboard(
-                              selectedProcess.objectDetections[0].tx_hash
+                              selectedProcess.objectDetections[0].concatenated_hash
                             )
                           }
                         />
@@ -193,7 +201,7 @@ const ListActivityProcess = ({ listActivity }) => {
                     muted
                     onClick={() => handleVideoClick(data)}
                   >
-                    <source src={data.video_url} type="video/mp4" />
+                    <source src={formatVideoUrl(data.video_url)} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -301,7 +309,7 @@ const ListActivityProcess = ({ listActivity }) => {
                                     <video
                                       className="w-24 h-24 lg:w-32 lg:h-32 object-cover rounded-lg shadow-md cursor-pointer"
                                       controls
-                                      src={video.video_url}
+                                      src={formatVideoUrl(video.video_url)}
                                       autoPlay
                                       loop
                                       muted
@@ -392,7 +400,7 @@ const ListActivityProcess = ({ listActivity }) => {
         </button>
         {selectedVideo && (
           <video className="w-full h-auto rounded-lg" controls autoPlay muted>
-            <source src={selectedVideo.video_url} type="video/mp4" />
+            <source src={formatVideoUrl(selectedVideo.video_url)} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}
