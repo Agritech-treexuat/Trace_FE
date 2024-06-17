@@ -56,6 +56,12 @@ const Navbar = () => {
               </a>
             </li>
 
+            <li className="navItem">
+              <a href="/plant" className="navLink">
+                Cây trồng
+              </a>
+            </li>
+
             {/* <li className="navItem">
               <a href="/news" className="navLink">
                 Tin tức

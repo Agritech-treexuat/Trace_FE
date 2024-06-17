@@ -23,9 +23,14 @@ import TransactionHash from "../Pages/TransactionHashQuery";
 import ProjectQuery from "../Pages/ProjectQuery";
 import ScanPrivateQR from "../Pages/Scan";
 import EventFarm from "../Pages/EventFarm";
+import Plant from "../Pages/Plant";
+import PlantRecommend from "../Pages/PlantRecommend";
+
 export const NormalRoutes = [
   { path: "/", element: <Home /> },
   { path: "/results/:projectId", element: <Result /> },
+  { path: "/plant", element: <Plant /> },
+  { path: "/plant/recommend/:plantId", element: <PlantRecommend />  },
   { path: "/farm", element: <Farm /> },
   { path: "/farm/detail/:farmId", element: <ProflieFarm /> },
   { path: "/farm/detail/:farmId/plants", element: <PlantFarm /> },
