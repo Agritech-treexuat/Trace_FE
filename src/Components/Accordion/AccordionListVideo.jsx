@@ -4,7 +4,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaCopy, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   formatTransactionHashTable,
   formatLongText,
@@ -37,6 +37,14 @@ const AccordionListVideo = ({ dataAccordion }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
 
+  const formatVideoUrl = (video_url) => {
+    // if video_url end with .avi, then replace it with .webm
+    if (video_url.endsWith(".avi")) {
+      return video_url.replace(".avi", ".webm");
+    }
+    return video_url
+  }
+
   const handleSwipe = (direction) => {
     const lastIndex = dataAccordion.length - 1;
     let newIndex;
@@ -50,8 +58,13 @@ const AccordionListVideo = ({ dataAccordion }) => {
     const newPosition = newIndex * sliderRef.current.offsetWidth;
     sliderRef.current.scrollTo({ left: newPosition, behavior: "smooth" });
   };
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
+  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+  
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    // alert("Copy thành công!");
+  };
   return (
     <>
       {dataAccordion?.map((data, index) => (
@@ -82,24 +95,40 @@ const AccordionListVideo = ({ dataAccordion }) => {
                       <dt className="text-sm font-medium text-gray-700">
                         Mã Transaction
                       </dt>
-                      <dd className="mt-1 text-sm text-blue-500 lg:text-base font-medium sm:mt-0 sm:col-span-2">
+                      <dd className="mt-1 text-sm text-blue-500 lg:text-base font-medium sm:mt-0 sm:col-span-2 flex">
                         {formatTransactionHashTable({
                           str: data?.objectDetections[0].tx_hash,
                           a: 8,
                           b: 5,
                         })}
+                      <FaCopy
+                          className="ml-3 cursor-pointer text-blue-400 hover:text-blue-800"
+                          onClick={() =>
+                            copyToClipboard(
+                              data?.objectDetections[0].tx_hash
+                            )
+                          }
+                        />
                       </dd>
                     </div>
-                    <div className="lg:py-3 py-1 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div className="lg:py-3 py-1 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 ">
                       <dt className="text-sm font-medium text-gray-700">
                         Video Hash
                       </dt>
-                      <dd className="mt-1 text-sm text-black lg:text-base font-medium sm:mt-0 sm:col-span-2">
+                      <dd className="mt-1 text-sm text-black lg:text-base font-medium sm:mt-0 sm:col-span-2 flex">
                         {formatLongText({
                           str: data?.objectDetections[0].concatenated_hash,
                           a: 8,
                           b: 5,
                         })}
+                        <FaCopy
+                          className="ml-3 cursor-pointer text-gray-400 hover:text-gray-700"
+                          onClick={() =>
+                            copyToClipboard(
+                              data?.objectDetections[0].concatenated_hash
+                            )
+                          }
+                        />
                       </dd>
                     </div>
                   </dl>
@@ -110,12 +139,12 @@ const AccordionListVideo = ({ dataAccordion }) => {
                   Danh sách video
                 </div>
                 <div className="flex items-center justify-center">
-                  <button
+                  {/* <button
                     className="bg-gray-200 p-2 rounded-full mx-2"
                     onClick={() => handleSwipe("left")}
                   >
                     <FaChevronLeft className="lg:h-6 lg:w-6 h-4 w-4 text-gray-600" />
-                  </button>
+                  </button> */}
                   <div
                     className="flex-1 overflow-x-scroll whitespace-nowrap scrollbar-hide"
                     ref={sliderRef}
@@ -133,19 +162,19 @@ const AccordionListVideo = ({ dataAccordion }) => {
                             autoPlay
                             muted
                           >
-                            <source src={item.video_url} type="video/mp4" />
+                            <source src={formatVideoUrl(item.video_url)} type="video/mp4" />
                             Your browser does not support the video tag
                           </video>
                         </div>
                       ))}
                     </div>
                   </div>
-                  <button
+                  {/* <button
                     className="bg-gray-200 p-2 rounded-full mx-2"
                     onClick={() => handleSwipe("right")}
                   >
                     <FaChevronRight className="lg:h-6 lg:w-6 h-4 w-4 text-gray-600" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

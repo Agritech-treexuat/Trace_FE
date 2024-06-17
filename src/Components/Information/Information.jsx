@@ -35,9 +35,8 @@ function Icon({ id, open }) {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
     >
       <path
         strokeLinecap="round"
@@ -195,16 +194,16 @@ const Information = () => {
         {isSuccessProjectInfo && (
           <button
             className="button"
-            // onClick={() =>
-            //   navigate(`/search/index/${projectInfo.projectIndex}`)
-            // }
+          // onClick={() =>
+          //   navigate(`/search/index/${projectInfo.projectIndex}`)
+          // }
           >
             <a
               href={`/search/index/${projectInfo.projectIndex}`}
               target="_blank"
               rel="noreferrer"
             >
-            Mã dự án trên blockchain : {projectInfo.projectIndex}
+              Mã dự án trên blockchain : {projectInfo.projectIndex}
             </a>
           </button>
         )}
@@ -253,7 +252,7 @@ const Information = () => {
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalConnectionLossBySeconds / 60} phút
                         {trustScore?.matKetNoi ||
-                        trustScore?.matKetNoi === 0 ? (
+                          trustScore?.matKetNoi === 0 ? (
                           <div>
                             <Rating value={trustScore.matKetNoi + 1} readonly />
                           </div>
@@ -269,7 +268,7 @@ const Information = () => {
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {processWithoutObjectDetectionCount} hoạt động
                         {trustScore?.hoatDongKhongCoVideo ||
-                        trustScore?.hoatDongKhongCoVideo === 0 ? (
+                          trustScore?.hoatDongKhongCoVideo === 0 ? (
                           <div>
                             <Rating
                               value={trustScore.hoatDongKhongCoVideo + 1}
@@ -288,7 +287,7 @@ const Information = () => {
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalDeletedItem} khai báo
                         {trustScore?.khaiBaoBiXoa ||
-                        trustScore?.khaiBaoBiXoa === 0 ? (
+                          trustScore?.khaiBaoBiXoa === 0 ? (
                           <div>
                             <Rating
                               value={trustScore.khaiBaoBiXoa + 1}
@@ -310,7 +309,7 @@ const Information = () => {
                           dataExpect?.length +
                           Output?.length} khai báo
                         {trustScore?.khaiBaoBiSuaDoi ||
-                        trustScore?.khaiBaoBiSuaDoi === 0 ? (
+                          trustScore?.khaiBaoBiSuaDoi === 0 ? (
                           <div>
                             <Rating
                               value={trustScore.khaiBaoBiSuaDoi + 1}
@@ -329,7 +328,7 @@ const Information = () => {
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalCamera} camera / {projectInfo.square} m2
                         {trustScore?.cameraDienTich ||
-                        trustScore?.cameraDienTich === 0 ? (
+                          trustScore?.cameraDienTich === 0 ? (
                           <div>
                             <Rating
                               value={trustScore.cameraDienTich + 1}
@@ -348,17 +347,17 @@ const Information = () => {
           )}
 
         <section className="more-infor">
-          <div className="mb-4">Video tổng quan</div>
-          <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("videoOverview")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
-              </div>
+          <div className="flex items-center mb-4">
+            <div className="text-base font-bold">Video tổng quan</div>
+            <IoInformationCircleSharp
+              onClick={(e) => {
+                e.stopPropagation();
+                setGuideType("videoOverview");
+                openDrawerTop();
+              }}
+              style={{ color: "green", fontSize: "2rem", marginLeft: "0.5rem" }}
+            />
+          </div>
           {isSuccessProjectInfo && projectInfo?.video_urls?.length > 0 && (
             <div>
               <VideoPlayer video_urls={projectInfo.video_urls} />
@@ -391,7 +390,7 @@ const Information = () => {
 
         <section className="timeline">
           {isSuccessProcess && dataProcess && (
-            <ProcessInformation processInfo={dataProcess} setGuideType={setGuideType} openDrawerTop={openDrawerTop}/>
+            <ProcessInformation processInfo={dataProcess} setGuideType={setGuideType} openDrawerTop={openDrawerTop} />
           )}
           {isLoadingProcess && <Spinner />}
         </section>
@@ -405,9 +404,8 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(1)}
-              className={`border-b-0 transition-colors ${
-                open === 1 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 1 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
               <h1>Video không tương ứng với hoạt động canh tác nào</h1>
               <div>
@@ -455,22 +453,21 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(2)}
-              className={`border-b-0 transition-colors ${
-                open === 2 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 2 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
               <div className="flex items-center ">
                 <h1> Thông tin dự kiến sản lượng</h1>
                 <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("expectedOutput")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
-              </div>
+                  <IoInformationCircleSharp
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setGuideType("expectedOutput")
+                      openDrawerTop()
+                    }}
+                    style={{ color: "green", fontSize: "2rem" }}
+                  />
+                </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -506,17 +503,16 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(3)}
-              className={`border-b-0 transition-colors ${
-                open === 3 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 3 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
-              Quy trình mẫu
-              <div>
+              <div className="flex items-center">
+                Quy trình mẫu
                 <IoInformationCircleSharp
                   onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("defaultPlantFarming")
-                    openDrawerTop()
+                    e.stopPropagation();
+                    setGuideType("defaultPlantFarming");
+                    openDrawerTop();
                   }}
                   style={{ color: "green", fontSize: "2rem" }}
                 />
@@ -540,22 +536,21 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(4)}
-              className={`border-b-0 transition-colors ${
-                open === 4 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 4 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
               <div className="flex items-center  flex-nowrap">
                 <h1 className="whitespace-nowrap">Đầu ra</h1>
                 <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("output")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
-              </div>
+                  <IoInformationCircleSharp
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setGuideType("output")
+                      openDrawerTop()
+                    }}
+                    style={{ color: "green", fontSize: "2rem" }}
+                  />
+                </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -592,21 +587,22 @@ const Information = () => {
             >
               <AccordionHeader
                 onClick={() => handleOpen(5)}
-                className={`border-b-0 transition-colors ${
-                  open === 5 ? "text-green-400 hover:text-green-700" : ""
-                } text-base lg:text-2xl`}
+                className={`border-b-0 transition-colors ${open === 5 ? "text-green-400 hover:text-green-700" : ""
+                  } text-base lg:text-2xl`}
               >
-                <h1>Hình ảnh và thời tiết</h1>
-                <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("imageAndWeather")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
-              </div>
+                <div className="flex items-center">
+                  <h1>Hình ảnh và thời tiết</h1>
+                  <div>
+                    <IoInformationCircleSharp
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setGuideType("imageAndWeather")
+                        openDrawerTop()
+                      }}
+                      style={{ color: "green", fontSize: "2rem" }}
+                    />
+                  </div>
+                </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -647,20 +643,21 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(6)}
-              className={`border-b-0 transition-colors ${
-                open === 6 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 6 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
-              Các chứng nhận
-              <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("certificates")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
+              <div className="flex items-center">
+                Các chứng nhận
+                <div>
+                  <IoInformationCircleSharp
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setGuideType("certificates")
+                      openDrawerTop()
+                    }}
+                    style={{ color: "green", fontSize: "2rem" }}
+                  />
+                </div>
               </div>
             </AccordionHeader>
             <AccordionBody className="pt-0 text-base font-normal">
@@ -679,22 +676,21 @@ const Information = () => {
           >
             <AccordionHeader
               onClick={() => handleOpen(7)}
-              className={`border-b-0 transition-colors ${
-                open === 7 ? "text-green-400 hover:text-green-700" : ""
-              } text-base lg:text-2xl`}
+              className={`border-b-0 transition-colors ${open === 7 ? "text-green-400 hover:text-green-700" : ""
+                } text-base lg:text-2xl`}
             >
               <div className="flex items-center ">
                 <h1> Các hoạt động bị xóa</h1>
                 <div>
-                <IoInformationCircleSharp
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setGuideType("deletedProcess")
-                    openDrawerTop()
-                  }}
-                  style={{ color: "green", fontSize: "2rem" }}
-                />
-              </div>
+                  <IoInformationCircleSharp
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setGuideType("deletedProcess")
+                      openDrawerTop()
+                    }}
+                    style={{ color: "green", fontSize: "2rem" }}
+                  />
+                </div>
                 <div className="ml-4 bg-blue-400 lg:p-2 p-1 rounded-lg flex items-center text-xs px-4 lg:px-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -791,7 +787,7 @@ const Information = () => {
       >
         <div className="mb-6 flex items-center justify-between">
           <Typography variant="h5" color="blue-gray">
-          Giải thích
+            Giải thích
           </Typography>
           <IconButton variant="text" color="blue-gray" onClick={closeDrawerTop}>
             <svg
@@ -812,41 +808,41 @@ const Information = () => {
         </div>
         <Typography color="gray" className="mb-8 pr-4 font-normal">
           {
-          guideType === "videoOverview" &&
-          "Đây là video về quá trình sinh trưởng của cây trồng, được ghép từ các hình ảnh được chụp mỗi giờ tại nơi canh tác."
+            guideType === "videoOverview" &&
+            "Đây là video về quá trình sinh trưởng của cây trồng, được ghép từ các hình ảnh được chụp mỗi giờ tại nơi canh tác."
           }
-        {
-          guideType === "nonProcessObjectDetection" &&
-          "Những video được phát hiện tự động nhưng không tương ứng với bất kỳ hoạt động canh tác nào được khai báo bởi nhà sản xuất nông nghiệp. (Đã được ghi trên Blockchain)"
-        }
-        {
-          guideType === "expectedOutput" &&
-          "Thông tin dự kiến sản lượng của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
-        }
-        {
-          guideType === "defaultPlantFarming" &&
-          "Là quy trình canh tác tham khảo của dự án."
-        }
-        {
-          guideType === "output" &&
-          "Thông tin về các lần thu hoạch của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
-        }
-        {
-          guideType === "imageAndWeather" &&
-          "Thông tin về hình ảnh và thời tiết của nơi canh tác. Chọn ngày mà bạn muốn xem, dữ liệu sẽ được cung cấp theo từng giờ. (Các hình ảnh đã được ghi trên Blockchain)"
-        }
-        {
-          guideType === "certificates" &&
-          "Các chứng nhận của dự án."
-        }
-        {
-          guideType === "deletedProcess" &&
-          "Các khai báo bị xóa của dự án. (Đều đã được ghi trên Blockchain)"
-        }
-        {
-          guideType === "process" &&
-          "Các hoạt động canh tác của dự án. (Đều đã được ghi trên Blockchain)"
-        }
+          {
+            guideType === "nonProcessObjectDetection" &&
+            "Những video được phát hiện tự động nhưng không tương ứng với bất kỳ hoạt động canh tác nào được khai báo bởi nhà sản xuất nông nghiệp. (Đã được ghi trên Blockchain)"
+          }
+          {
+            guideType === "expectedOutput" &&
+            "Thông tin dự kiến sản lượng của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+          }
+          {
+            guideType === "defaultPlantFarming" &&
+            "Là quy trình canh tác tham khảo của dự án."
+          }
+          {
+            guideType === "output" &&
+            "Thông tin về các lần thu hoạch của dự án được khai báo bởi nhà sản xuất nông nghiệp. (Đã đã được ghi trên Blockchain)"
+          }
+          {
+            guideType === "imageAndWeather" &&
+            "Thông tin về hình ảnh và thời tiết của nơi canh tác. Chọn ngày mà bạn muốn xem, dữ liệu sẽ được cung cấp theo từng giờ. (Các hình ảnh đã được ghi trên Blockchain)"
+          }
+          {
+            guideType === "certificates" &&
+            "Các chứng nhận của dự án."
+          }
+          {
+            guideType === "deletedProcess" &&
+            "Các khai báo bị xóa của dự án. (Đều đã được ghi trên Blockchain)"
+          }
+          {
+            guideType === "process" &&
+            "Các hoạt động canh tác của dự án. (Đều đã được ghi trên Blockchain)"
+          }
         </Typography>
       </Drawer>
     </section>
