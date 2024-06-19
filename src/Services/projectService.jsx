@@ -1,6 +1,19 @@
 import publicHttp from "./Http/publicHttp.config";
 
 const PROJECT = {
+  getCameraInProject: async (projectId) => {
+    return await publicHttp({
+      method: 'GET',
+      url: `/project/${projectId}/camera`
+    })
+      .then((res) => {
+        return res
+      })
+      .catch((err) => {
+        return err
+      })
+  },
+  
   getProjects: async (farmId) => {
     return await publicHttp({
       method: "GET",

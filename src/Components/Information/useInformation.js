@@ -548,7 +548,36 @@ export default function useInformation({ projectId }) {
     enabled: !!projectId,
   });
 
+  const parseDataCameraInProject = useCallback((data) => {
+    const cameraInProject = data.map((camera) => {
+      return {
+        _id: camera?._id,
+        name: camera?.name,
+        rtsp_link: camera?.rtsp_link
+      }
+    })
+    return {
+      cameraInProject
+    }
+  }, [])
+
+  const {
+    data: cameraInProject,
+    isSuccess: isSuccessCameraInProject,
+    isLoading: isLoadingCameraInProject,
+    refetch: refetchCameraInProject
+  } = useQuery({
+    queryKey: ['cameraInProject', projectId],
+    queryFn: () => PROJECT.getCameraInProject(projectId),
+    staleTime: 20 * 1000,
+    select: (data) => parseDataCameraInProject(data?.data?.metadata),
+    enabled: !!projectId
+  })
+
   return {
+    cameraInProject: cameraInProject?.cameraInProject,
+    isSuccessCameraInProject,
+    isLoadingCameraInProject,
     ImageProduct: dataOutput?.outputImages,
     allDistributerWithAmount: dataOutput?.allDistributerWithAmount,
     Output: dataOutput?.output,
