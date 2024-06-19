@@ -26,6 +26,7 @@ import AccordionOutput from "../Accordion/AccordionOutput";
 import InformationOverview from "./InformationOverview";
 import AccordionListVideo from "../Accordion/AccordionListVideo";
 import TrustEvaluator from "../../Utils/trustCalculater";
+import YouTubeEmbed from "../YouTubeEmbed";
 
 function Icon({ id, open }) {
   return (
@@ -62,6 +63,9 @@ const Information = () => {
     Aos.init({ duration: 2000 });
   }, []);
   const {
+    cameraInProject,
+    isSuccessCameraInProject,
+    isLoadingCameraInProject,
     ImageProduct,
     allDistributerWithAmount,
     Output,
@@ -370,6 +374,45 @@ const Information = () => {
               </div>
             ))}
         </section>
+
+        {
+          isSuccessProjectInfo && !projectInfo?.endDate && (
+            <section className="more-infor">
+          <div className="flex items-center mb-4">
+            <div className="text-base font-bold">Livestream từ nơi canh tác</div>
+            <IoInformationCircleSharp
+              onClick={(e) => {
+                e.stopPropagation();
+                setGuideType("list_livestream");
+                openDrawerTop();
+              }}
+              style={{ color: "green", fontSize: "2rem", marginLeft: "0.5rem" }}
+            />
+          </div>
+          {isSuccessCameraInProject && cameraInProject?.length > 0 && (
+            <div>
+              {
+                cameraInProject?.map((camera, index) => (
+                  <div key={index} className="mb-4">
+                    <div className="text-base font-bold">Camera {index + 1}</div>
+                    <div classsName="h-96 block">
+                    <YouTubeEmbed videoUrl={camera.rtsp_link} />
+                    </div>
+                    </div>
+                ))
+              }
+            </div>
+          )}
+          {(isSuccessCameraInProject && !cameraInProject) ||
+            (cameraInProject?.length === 0  && (
+              <div className="text-base text-gray-300 font-normal p-4">
+                Không có livestream từ nơi canh tác
+              </div>
+            ))}
+        </section>
+          )
+        }
+        
         <section className="infor">
           {isSuccessProjectInfo &&
             isSuccessQR &&
