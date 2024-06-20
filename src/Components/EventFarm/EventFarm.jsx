@@ -8,6 +8,7 @@ import {
   formatDateTime,
   formatTransactionHashTable,
 } from "../../Utils/helpers";
+import Loading from "../Loading";
 
 const EventFarmComponent = () => {
   const { farmId } = useParams();
@@ -139,6 +140,8 @@ const EventFarmComponent = () => {
 
   return (
     <>
+    {
+      isSuccessAllEventByFarm && allEventByFarm && allEventByFarm.length > 0 && 
       <section className="py-1 bg-blueGray-50">
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-2xl">
@@ -238,11 +241,11 @@ const EventFarmComponent = () => {
           </div>
         </div>
       </section>
+    }
+      
 
       {isLoadingAllEventByFarm && (
-        <div className="flex flex-col items-center justify-center pt-[10vh]">
-          <p className="text-lg font-semibold text-gray-800">Loading...</p>
-        </div>
+        <Loading />
       )}
       {isSuccessAllEventByFarm &&
         (!allEventByFarm || allEventByFarm.length === 0) && (
