@@ -18,6 +18,7 @@ import useProfile from "../Profile/useProfile";
 import Avarta from "../Avarta/Avarta";
 import { formatDate, formatDateTime } from "../../Utils/helpers";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
 const MAX_DESCRIPTION_LENGTH = 100; // Số ký tự tối đa bạn muốn hiển thị
 
 const ListProject = () => {
@@ -77,7 +78,6 @@ const ListProject = () => {
     <>
       <div data-aos="fade-up" className="mx-auto pt-20">
         {isSuccessFarmInfo && <Avarta data={farmInfo.images} />}
-        {isLoadingFarmInfo && <Spinner />}
         <section className="relative py-2 bg-blueGray-200">
           {isSuccessFarmInfo && (
             <div className="container mx-auto px-4">
@@ -104,10 +104,10 @@ const ListProject = () => {
               </div>
             </div>
           )}
-          {isLoadingFarmInfo && <Spinner />}
+          {isLoadingFarmInfo && <Loading />}
         </section>
         <section className="pt-[4vh] px-8 mb-5 ">
-          <span className="orangeText">Danh sách dự án</span>
+          <span className="primaryText">Danh sách dự án</span>
           <div className="w-72">
             <Select
               label="Lựa chọn trạng thái dự án"
@@ -192,7 +192,7 @@ const ListProject = () => {
               </button>
             ))}
           </div>
-          {isLoadingProject && <Spinner />}
+          {isLoadingProject && <Loading />}
         </section>
       </div>
     </>

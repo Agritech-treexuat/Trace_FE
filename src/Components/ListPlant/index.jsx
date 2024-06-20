@@ -6,6 +6,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { renderTypePlant } from "../../Utils/helpers";
 import useListPlant from "./useListPlant";
+import Loading from "../Loading";
 
 const ListPlant = () => {
   const { allPlant, isSuccessPlant, isLoadingPlant } = useListPlant();
@@ -134,7 +135,7 @@ const ListPlant = () => {
           </div>
         </>
       )}
-      {isLoadingPlant && <Spinner />}
+      {isLoadingPlant && <Loading />}
     </section>
   );
 };

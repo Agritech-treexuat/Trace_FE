@@ -15,6 +15,7 @@ import {
 } from "../../constants";
 import { formatDateTime, formatWalletAddress } from "../../Utils/helpers";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading";
 function Icon({ id, open }) {
   return (
     <svg
@@ -383,9 +384,7 @@ const SearchId = () => {
         </div>
       )}
       {loading && (
-        <p className="text-center" style={{ paddingTop: "10vh" }}>
-          Đang tải dữ liệu...
-        </p>
+        <Loading />
       )}
     </section>
   );

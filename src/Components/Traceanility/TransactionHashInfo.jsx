@@ -3,6 +3,7 @@ import Web3 from "web3";
 import { Spinner } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { eventMap, eventMapData } from "../../constants";
+import Loading from "../Loading";
 
 const TransactionHashInfo = () => {
   const [transactionInfo, setTransactionInfo] = useState(null);
@@ -95,8 +96,8 @@ const TransactionHashInfo = () => {
       {loading ? (
         <p style={{ paddingTop: "10vh" }}>
           {" "}
-          Loading information from blockchain{" "}
-          <Spinner color="lightBlue" size="xl" />
+          {/* Loading information from blockchain{" "} */}
+          <Loading />
         </p>
       ) : transactionInfo ? (
         <section

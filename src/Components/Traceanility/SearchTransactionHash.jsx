@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Web3 from "web3";
 import { Spinner } from "@material-tailwind/react";
 import { eventMap, eventMapData } from "../../constants";
+import Loading from "../Loading";
 
 const SearchTransactionHash = () => {
   const [transactionHash, setTransactionHash] = useState("");
@@ -96,7 +97,7 @@ const SearchTransactionHash = () => {
       </section>
 
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : (
         transactionInfo && (
           <section className="bg-gray-100 p-4 md:p-10 mx-2 md:mx-5">

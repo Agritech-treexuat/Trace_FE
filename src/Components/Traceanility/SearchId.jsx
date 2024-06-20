@@ -14,6 +14,7 @@ import {
   videoContractAddress,
 } from "../../constants";
 import { formatDateTime, formatWalletAddress } from "../../Utils/helpers";
+import Loading from "../Loading";
 function Icon({ id, open }) {
   return (
     <svg
@@ -400,7 +401,7 @@ const SearchId = () => {
           <p>{error}</p>
         </div>
       )}
-      {loading && <p className="text-center">Đang tải dữ liệu...</p>}
+      {loading && <Loading />}
     </section>
   );
 };
