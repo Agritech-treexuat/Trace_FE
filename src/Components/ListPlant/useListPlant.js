@@ -17,8 +17,10 @@ export default function useListPlant() {
       plant_slug: plant.plant_slug,
     }));
 
-    const plantsCount = allplant.length;
-    return { allplant, plantsCount };
+    const allActivePlant = allplant.filter((plant) => plant.isActive);
+
+    const plantsCount = allActivePlant.length;
+    return { allActivePlant, plantsCount };
   }, []);
 
   const {
@@ -34,7 +36,7 @@ export default function useListPlant() {
   
 
   return {
-    allPlant: dataAllPlant?.allplant,
+    allPlant: dataAllPlant?.allActivePlant,
     plantsCount: dataAllPlant?.plantsCount,
     isSuccessPlant,
     isLoadingPlant,

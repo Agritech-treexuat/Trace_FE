@@ -21,6 +21,7 @@ import {
   renderTypeFertilization,
   renderTypePestAndDisease,
 } from "../../Utils/helpers";
+import Loading from "../Loading";
 
 const DialogDefault = ({ data, isOpen, handleClose }) => {
   return (
@@ -491,7 +492,7 @@ const PlantRecommendDetail = () => {
             </section>
           </>
         )}
-        {isLoadingPlantFarmById && <Spinner />}
+        {isLoadingPlantFarmById && <Loading />}
         <Footer />
       </>
     </section>

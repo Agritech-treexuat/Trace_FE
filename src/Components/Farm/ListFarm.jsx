@@ -5,6 +5,7 @@ import { Spinner } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Loading from "../Loading";
 
 const ListFarm = () => {
   const { allFarm, isSuccessAllFarm, isLoadingAllFarm } = useListFarm();
@@ -135,7 +136,7 @@ const ListFarm = () => {
           </div>
         </>
       )}
-      {isLoadingAllFarm && <Spinner />}
+      {isLoadingAllFarm && <Loading />}
     </section>
   );
 };

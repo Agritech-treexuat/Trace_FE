@@ -8,6 +8,7 @@ import Avarta from "../Avarta/Avarta";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
 const ProfileFarm = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -65,7 +66,7 @@ const ProfileFarm = () => {
     <>
       <div data-aos="fade-up" className="mx-auto pt-20">
         {isSuccessFarmInfo && farmInfo.id && <Avarta data={farmInfo.images} />}
-        {isLoadingFarmInfo && <Spinner />}
+        {isLoadingFarmInfo && <Loading />}
 
         <section data-aos="fade-up" className="relative py-8 bg-blueGray-200">
           {isSuccessFarmInfo && farmInfo.id && (
@@ -107,7 +108,6 @@ const ProfileFarm = () => {
               </div>
             </div>
           )}
-          {isLoadingFarmInfo && <Spinner />}
         </section>
 
         <section>
@@ -144,7 +144,6 @@ const ProfileFarm = () => {
               </div>
             </div>
           )}
-          {isLoadingFarmInfo && <Spinner />}
         </section>
       </div>
       {isSuccessQR &&
@@ -246,10 +245,10 @@ const ProfileFarm = () => {
         )}
 
       {isSuccessPlant && <Plant dataPlant={allPlant} />}
-      {isLoadingPlant && <Spinner />}
+      {isLoadingPlant && <Loading />}
 
       {isSuccessProject && <Project dataProject={allProject} />}
-      {isLoadingProject && <Spinner />}
+      {isLoadingProject && <Loading />}
     </>
   );
 };

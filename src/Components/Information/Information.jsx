@@ -27,6 +27,7 @@ import InformationOverview from "./InformationOverview";
 import AccordionListVideo from "../Accordion/AccordionListVideo";
 import TrustEvaluator from "../../Utils/trustCalculater";
 import YouTubeEmbed from "../YouTubeEmbed";
+import Loading from "../Loading";
 
 function Icon({ id, open }) {
   return (
@@ -216,7 +217,7 @@ const Information = () => {
             Trạng thái: {renderStatus(projectInfo.status, Output)}
           </button>
         )}
-        {isLoadingProjectInfo && <Spinner />}
+        {isLoadingProjectInfo && <Loading />}
       </div>
 
       <section className="content">
@@ -428,14 +429,13 @@ const Information = () => {
                 dataInfoOverview={projectInfo}
               />
             )}
-          {isLoadingProjectInfo && <Spinner />}
         </section>
 
         <section className="timeline">
           {isSuccessProcess && dataProcess && (
             <ProcessInformation processInfo={dataProcess} setGuideType={setGuideType} openDrawerTop={openDrawerTop} />
           )}
-          {isLoadingProcess && <Spinner />}
+          {isLoadingProcess && <Loading />}
         </section>
       </section>
 
@@ -536,7 +536,7 @@ const Information = () => {
                 {isSuccessExpect && dataExpect && (
                   <Tables infoData={dataExpect} />
                 )}
-                {isLoadingExpect && <Spinner />}
+                {isLoadingExpect && <Loading />}
               </section>
             </AccordionBody>
           </Accordion>
@@ -570,7 +570,7 @@ const Information = () => {
                   />
                 </section>
               )}
-              {isLoadingPlantFarming && <Spinner />}
+              {isLoadingPlantFarming && <Loading />}
             </AccordionBody>
           </Accordion>
           <Accordion
@@ -619,7 +619,7 @@ const Information = () => {
                 {isSuccessOutput && Output && (
                   <AccordionOutput dataAccordion={Output} />
                 )}
-                {isLoadingOutput && <Spinner />}
+                {isLoadingOutput && <Loading />}
               </section>
             </AccordionBody>
           </Accordion>
@@ -679,7 +679,7 @@ const Information = () => {
               </AccordionBody>
             </Accordion>
           )}
-          {isLoadingImage || (isLoadingWeather && <Spinner />)}
+          {isLoadingImage || (isLoadingWeather && <Loading />)}
           <Accordion
             open={open.includes(6)}
             className="rounded-lg border border-blue-gray-300 px-4 mb-2 max-w-3xl mx-auto"
@@ -710,7 +710,7 @@ const Information = () => {
                   isSuccessCertificateImages={isSuccessCertificateImages}
                 />
               )}
-              {isLoadingCertificateImages && <Spinner />}
+              {isLoadingCertificateImages && <Loading />}
             </AccordionBody>
           </Accordion>
           <Accordion
@@ -816,7 +816,7 @@ const Information = () => {
                     </Accordion>
                   </>
                 )}
-                {isLoadingDeleteProcess && <Spinner />}
+                {isLoadingDeleteProcess && <Loading />}
               </section>
             </AccordionBody>
           </Accordion>

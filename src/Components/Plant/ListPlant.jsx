@@ -8,6 +8,8 @@ import {
   Typography,
   Button,
   Spinner,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 
 import useProfile from "../Profile/useProfile";
@@ -16,6 +18,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
 import { renderTypePlant } from "../../Utils/helpers";
+import Loading from "../Loading";
 const MAX_DESCRIPTION_LENGTH = 100; // Số ký tự tối đa bạn muốn hiển thị
 
 const ListPlant = () => {
@@ -34,13 +37,20 @@ const ListPlant = () => {
   } = useProfile({
     farmId,
   });
+  const [plantType, setPlantType] = useState("all");
+  const filterPlants = allPlant ? allPlant.filter((plant) => {
+    if (plantType === "all") {
+      return true;
+    }
+    return plant.type === plantType;
+  } ) : [];
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const totalPages = Math.ceil(allPlant?.length / itemsPerPage);
+  const totalPages = Math.ceil(filterPlants?.length / itemsPerPage);
 
-  const currentPlants = allPlant?.slice(
+  const currentPlants = filterPlants?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -48,6 +58,8 @@ const ListPlant = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  
 
   return (
     <>
@@ -85,9 +97,25 @@ const ListPlant = () => {
             </section>
           </>
         )}
-        {isLoadingFarmInfo && <Spinner />}
+        {isLoadingFarmInfo && <Loading />}
         <section className="mx-auto pt-[4vh] px-8 mb-5 justify-center">
-          <span className="orangeText">Danh sách cây trồng</span>
+          <span className="primaryText">Danh sách cây trồng</span>
+          <div className="w-72">
+            <Select
+              label="Lựa chọn kiểu cây trồng"
+              value={plantType}
+              onChange={(val) => {
+                console.log("val: ", val);
+                setPlantType(val);
+              }}
+            >
+              <Option value="all">Tất cả</Option>
+              <Option value="herb">Rau gia vị</Option>
+              <Option value="leafy">Rau ăn lá</Option>
+              <Option value="root">Củ</Option>
+              <Option value="fruit">Quả</Option>
+            </Select>
+          </div>
           <div className=" mx-auto grid flex justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
             {isSuccessPlant &&
               currentPlants?.map((card) => (
@@ -138,7 +166,7 @@ const ListPlant = () => {
                 </Card>
               ))}
 
-            {isLoadingPlant && <Spinner />}
+            {isLoadingPlant && <Loading />}
           </div>
           <div className="mt-8 flex justify-center">
             {Array.from({ length: totalPages }, (_, index) => (

@@ -22,6 +22,7 @@ import {
   renderTypeFertilization,
   renderTypePestAndDisease,
 } from "../../Utils/helpers";
+import Loading from "../Loading";
 
 const DialogDefault = ({ data, isOpen, handleClose }) => {
   return (
@@ -236,7 +237,7 @@ const PlantDetil = () => {
             </section>
           </>
         )}
-        {isLoadingFarmInfo && <Spinner />}
+        {isLoadingFarmInfo && <Loading />}
         {isSuccessPlantFarmById && (
           <>
             <section className="mb-5">
@@ -529,7 +530,7 @@ const PlantDetil = () => {
             </section>
           </>
         )}
-        {isLoadingPlantFarmById && <Spinner />}
+        {isLoadingPlantFarmById && <Loading />}
         <Footer />
       </>
     </section>
