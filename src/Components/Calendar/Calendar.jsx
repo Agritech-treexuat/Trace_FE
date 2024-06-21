@@ -14,7 +14,9 @@ import {
   formatTransactionHashTable,
   formatDateTime,
   formatDate,
+  formatLongText,
 } from "../../Utils/helpers";
+import { FaCopy } from "react-icons/fa";
 
 const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
   const days = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
@@ -95,6 +97,11 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
   };
 
   const imagesByHour = groupImagesByHour();
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    // alert("Copy thành công!");
+  };
 
   return (
     <section>
@@ -208,7 +215,9 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
                           <p className="text-gray-800 text-base lg:ml-4 lg:text-xl font-semibold lg:mb-2">
                             {formatDateTime(item.capture_time)}
                           </p>
-                          <p className="font-semibold text-gray-600 lg:text-base lg:ml-4">
+                          <div className="flex items-center">
+
+                          <p className="font-semibold text-blue-800 lg:text-base lg:ml-4">
                             Mã Hash: {formatTransactionHashTable(
                               {
                                 str: item.tx_hash,
@@ -217,15 +226,34 @@ const Calendar = ({ dataImage, dataWeather, startTime, endTime }) => {
                               }
                             )}
                           </p>
+                          <FaCopy
+                          className="ml-3 cursor-pointer text-blue-400 hover:text-blue-800"
+                          onClick={() =>
+                            copyToClipboard(
+                              item.tx_hash
+                            )
+                          }
+                        />
+                        </div>
+                        <div className="flex items-center">
                           <p className="font-semibold text-gray-600 lg:text-base lg:ml-4">
                             Image Hash: {
-                              formatTransactionHashTable({
+                              formatLongText({
                                 str: item.image_hash,
                                 a: 8,
                                 b: 5,
                               })
                             }
                           </p>
+                          <FaCopy
+                          className="ml-3 cursor-pointer text-blue-400 hover:text-gray-600"
+                          onClick={() =>
+                            copyToClipboard(
+                              item.image_hash
+                            )
+                          }
+                        />
+                        </div>
                         </div>
                       ))
                     ) : (
