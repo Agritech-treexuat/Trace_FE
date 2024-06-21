@@ -34,7 +34,12 @@ export default function useInformation({ projectId }) {
     }));
 
     const editOutputCount = output.reduce(
-      (total, item) => total + item.historyOutput.length,
+      (total, item) => {
+        if (item.isEdited) {
+          return total + 1;
+        }
+        return total;
+      },
       0
     );
 
@@ -242,10 +247,16 @@ export default function useInformation({ projectId }) {
     ).length;
 
     // check number of edit process base on number of item in historyProcess each
-    let totalEditProcess = 0;
-    dataProcess.forEach((item) => {
-      totalEditProcess += item.historyProcess.length;
-    });
+    const totalEditProcess = dataProcess.reduce(
+      (total, item) => {
+        if (item.isEdited) {
+          return total + 1;
+        }
+        return total;
+      },
+      0
+    );
+    
     return {
       dataProcess,
       formatedNonProcessObjectDetectionewArray,
@@ -296,9 +307,13 @@ export default function useInformation({ projectId }) {
     });
 
     const editExpectCount = expect.reduce(
-      (total, item) => total + item.historyExpect.length,
-      0
-    );
+      (total, item) => {
+        if (item.isEdited) {
+          return total + 1;
+        }
+        return total;
+      }
+      , 0);
     return { expectFull, editExpectCount };
   }, []);
 
@@ -412,6 +427,8 @@ export default function useInformation({ projectId }) {
     connectionLosses.map((item) => {
       item.start_time = new Date(item.start_time);
     });
+
+    console.log("connectionLosses" , connectionLosses)
 
     const totalConnectionLossBySeconds = connectionLosses.reduce(
       (total, item) =>
