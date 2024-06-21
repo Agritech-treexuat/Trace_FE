@@ -171,25 +171,26 @@ const Information = () => {
       setTrustScore(
         TrustEvaluator.evaluateTrust({
           matKetNoi: totalConnectionLossBySeconds,
-          tongThoiGian: projectInfo.totalTime,
+          tongThoiGian: projectInfo?.totalTime,
           hoatDongKhongCoVideo: processWithoutObjectDetectionCount,
-          tongHoatDong: dataProcess.length,
+          tongHoatDong: dataProcess?.length,
           khaiBaoBiXoa: totalDeletedItem,
-          tongKhaiBao: dataProcess.length + dataExpect.length + Output.length,
+          tongKhaiBao: dataProcess?.length + dataExpect?.length + Output?.length + totalDeletedItem,
           khaiBaoBiSuaDoi: totalEditProcess + editExpectCount + editOutputCount,
           cameraDienTich: totalCamera,
-          dienTich: projectInfo.square,
+          dienTich: projectInfo?.square,
         })
       );
     }
+    console.log("trustScore", trustScore);
   }, [
-    totalConnectionLossBySeconds,
-    processWithoutObjectDetectionCount,
-    totalDeletedItem,
-    totalCamera,
-    dataProcess,
-    dataExpect,
-    Output,
+    isSuccessConnectionLoss,
+    isSuccessDeleteProcess,
+    isSuccessCamera,
+    isSuccessProcess,
+    isSuccessExpect,
+    isSuccessOutput,
+    isSuccessProjectInfo
   ]);
 
   return (
@@ -308,6 +309,7 @@ const Information = () => {
                       <th className="border-t-0 px-4 align-middle lg:text-base text-sm font-normal whitespace-nowrap p-4 text-left">
                         Số khai báo bị sửa đổi
                       </th>
+                        
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
                         {totalEditProcess + editExpectCount + editOutputCount} /{" "}
                         {dataProcess?.length +

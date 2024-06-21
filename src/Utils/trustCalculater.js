@@ -43,14 +43,14 @@ class TrustEvaluator {
             matKetNoi: [0.01, 0.02, 0.05, 0.10],
             hoatDongKhongCoVideo: [0.05, 0.2, 0.5, 0.8],
             khaiBaoBiXoa: [0.1, 0.3, 0.5, 0.8],
-            khaiBaoBiSuaDoi: [0.1, 0.3, 0.6, 0.9],
+            khaiBaoBiSuaDoi: [0.1, 0.3, 0.6, 1],
             cameraDienTich: [1500, 3000, 4000, 6000]
         };
 
         let scores = {
             matKetNoi: this.calculateScore(metrics.matKetNoi / metrics.tongThoiGian, thresholds.matKetNoi),
             hoatDongKhongCoVideo: this.calculateScore(metrics.hoatDongKhongCoVideo / metrics.tongHoatDong, thresholds.hoatDongKhongCoVideo),
-            khaiBaoBiXoa: this.calculateScore(metrics.khaiBaoBiXoa / metrics.tongKhaiBao + metrics.khaiBaoBiXoa, thresholds.khaiBaoBiXoa),
+            khaiBaoBiXoa: this.calculateScore(metrics.khaiBaoBiXoa / metrics.tongKhaiBao, thresholds.khaiBaoBiXoa),
             khaiBaoBiSuaDoi: this.calculateScore(metrics.khaiBaoBiSuaDoi / metrics.tongKhaiBao, thresholds.khaiBaoBiSuaDoi),
             cameraDienTich: this.calculateScore(metrics.dienTich / metrics.cameraDienTich, thresholds.cameraDienTich)
         };
