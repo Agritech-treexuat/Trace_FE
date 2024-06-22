@@ -63,6 +63,7 @@ const Information = () => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
+
   const {
     cameraInProject,
     isSuccessCameraInProject,
@@ -158,16 +159,7 @@ const Information = () => {
   };
 
   useEffect(() => {
-    if (
-      projectInfo &&
-      totalConnectionLossBySeconds !== null &&
-      processWithoutObjectDetectionCount !== null &&
-      totalDeletedItem !== null &&
-      totalCamera !== null &&
-      dataProcess &&
-      dataExpect &&
-      Output
-    ) {
+    if(isSuccessConnectionLoss && isSuccessDeleteProcess && isSuccessCamera && isSuccessProcess && isSuccessExpect && isSuccessOutput && isSuccessProjectInfo) {
       setTrustScore(
         TrustEvaluator.evaluateTrust({
           matKetNoi: totalConnectionLossBySeconds,
@@ -182,7 +174,6 @@ const Information = () => {
         })
       );
     }
-    console.log("trustScore", trustScore);
   }, [
     isSuccessConnectionLoss,
     isSuccessDeleteProcess,
@@ -192,6 +183,22 @@ const Information = () => {
     isSuccessOutput,
     isSuccessProjectInfo
   ]);
+
+  // if(isSuccessConnectionLoss && isSuccessDeleteProcess && isSuccessCamera && isSuccessProcess && isSuccessExpect && isSuccessOutput && isSuccessProjectInfo){
+  //   setTrustScore(
+  //     TrustEvaluator.evaluateTrust({
+  //       matKetNoi: totalConnectionLossBySeconds,
+  //       tongThoiGian: projectInfo?.totalTime,
+  //       hoatDongKhongCoVideo: processWithoutObjectDetectionCount,
+  //       tongHoatDong: dataProcess?.length,
+  //       khaiBaoBiXoa: totalDeletedItem,
+  //       tongKhaiBao: dataProcess?.length + dataExpect?.length + Output?.length + totalDeletedItem,
+  //       khaiBaoBiSuaDoi: totalEditProcess + editExpectCount + editOutputCount,
+  //       cameraDienTich: totalCamera,
+  //       dienTich: projectInfo?.square,
+  //     })
+  //   );
+  // }
 
   return (
     <section className="information">
@@ -222,14 +229,7 @@ const Information = () => {
       </div>
 
       <section className="content">
-        {projectInfo &&
-          totalConnectionLossBySeconds !== null &&
-          processWithoutObjectDetectionCount !== null &&
-          totalDeletedItem !== null &&
-          totalCamera !== null &&
-          dataProcess &&
-          dataExpect &&
-          Output && (
+        {trustScore ? (
             <section className="more-infor">
               <div className="px-4 text-gray-900 text-2xl font-bold mt-8 mb-4 lg:ml-8">
                 Thông tin đánh giá
@@ -240,6 +240,9 @@ const Information = () => {
                     : "none"}
                   {trustScore?.totalScore || trustScore?.totalScore === 0 ? (
                     <div>
+                      {
+                        console.log("trustScore.totalScore + 1", trustScore.totalScore + 1)
+                      }
                       <Rating value={trustScore.totalScore + 1} readonly />
                     </div>
                   ) : (
@@ -260,6 +263,9 @@ const Information = () => {
                         {trustScore?.matKetNoi ||
                           trustScore?.matKetNoi === 0 ? (
                           <div>
+                            {
+                              console.log("trustScore.matKetNoi + 1", trustScore.matKetNoi + 1)
+                            }
                             <Rating value={trustScore.matKetNoi + 1} readonly />
                           </div>
                         ) : (
@@ -272,10 +278,13 @@ const Information = () => {
                         Số hoạt động không có video đi kèm
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {processWithoutObjectDetectionCount} hoạt động
+                        {processWithoutObjectDetectionCount} / {dataProcess?.length} hoạt động
                         {trustScore?.hoatDongKhongCoVideo ||
                           trustScore?.hoatDongKhongCoVideo === 0 ? (
                           <div>
+                            {
+                              console.log("trustScore.hoatDongKhongCoVideo + 1", trustScore.hoatDongKhongCoVideo + 1)
+                            }
                             <Rating
                               value={trustScore.hoatDongKhongCoVideo + 1}
                               readonly
@@ -291,10 +300,16 @@ const Information = () => {
                         Số khai báo bị xoá
                       </th>
                       <td className="border-t-0 px-4 align-middle lg:text-sm text-sm font-medium text-gray-900 whitespace-nowrap p-4">
-                        {totalDeletedItem} khai báo
+                        {totalDeletedItem} /{" "}
+                        {dataProcess?.length +
+                          dataExpect?.length +
+                          Output?.length} khai báo
                         {trustScore?.khaiBaoBiXoa ||
                           trustScore?.khaiBaoBiXoa === 0 ? (
                           <div>
+                            {
+                              console.log("trustScore.khaiBaoBiXoa + 1", trustScore.khaiBaoBiXoa + 1)
+                            }
                             <Rating
                               value={trustScore.khaiBaoBiXoa + 1}
                               readonly
@@ -318,6 +333,9 @@ const Information = () => {
                         {trustScore?.khaiBaoBiSuaDoi ||
                           trustScore?.khaiBaoBiSuaDoi === 0 ? (
                           <div>
+                            {
+                              console.log("trustScore.khaiBaoBiSuaDoi + 1", trustScore.khaiBaoBiSuaDoi + 1)
+                            }
                             <Rating
                               value={trustScore.khaiBaoBiSuaDoi + 1}
                               readonly
@@ -337,6 +355,9 @@ const Information = () => {
                         {trustScore?.cameraDienTich ||
                           trustScore?.cameraDienTich === 0 ? (
                           <div>
+                            {
+                              console.log("trustScore.cameraDienTich + 1", trustScore.cameraDienTich + 1)
+                            }
                             <Rating
                               value={trustScore.cameraDienTich + 1}
                               readonly
@@ -351,7 +372,7 @@ const Information = () => {
                 </table>
               </div>
             </section>
-          )}
+          ) : <Loading />}
 
         <section className="more-infor">
           <div className="flex items-center mb-4">
