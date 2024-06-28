@@ -75,7 +75,7 @@ const Navbar = () => {
             </li> */}
 
             <button className="btn" onClick={handleOpen}>
-              <a>Truy xuất</a>
+              <a>Truy xuất trên blockchain</a>
             </button>
           </ul>
 
