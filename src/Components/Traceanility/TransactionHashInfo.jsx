@@ -183,7 +183,11 @@ const TransactionHashInfo = () => {
           </div>
         </section>
       ) : (
-        <p style={{ paddingTop: "10vh" }}>Transaction not found</p>
+        <div>
+          <p style={{ paddingTop: "10vh" }}>Decode for this transaction has failed</p>
+          <p>Check more at: <a href={`https://www.mintscan.io/evmos/tx/${txHashParams}`} target="_blank" rel="noreferrer" className="text-blue-500"> transaction info</a></p>
+        </div>
+        
       )}
     </section>
   );
